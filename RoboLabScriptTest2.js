@@ -60,7 +60,7 @@ $('#button_copper').click(function() {
 
 $('#button_iron').click(function() {
     disableControl()
-   sample = 'iron'; 
+   sample = 'Iron'; 
     sampleClean = 1;
     sampleActiv = 0;
     samplePos = 0;
