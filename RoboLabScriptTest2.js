@@ -73,7 +73,7 @@ $('#button_iron').click(function() {
 $('#button_putIn').click(function() {
    if (sample == 0) {
        alert('No sample selected!')
-   }  else if (sample == 'copper' && sampleActiv == 0) {
+   }  else if (sample == 'Copper' && sampleActiv == 0) {
        disableControl()
         sampleClean = 0;
        sampleActiv = 1;
@@ -83,7 +83,7 @@ $('#button_putIn').click(function() {
        playVideo()
        samplePos = 1
        
-    } else if (sample == 'iron' && sampleActiv == 0) {
+    } else if (sample == 'Iron' && sampleActiv == 0) {
         disableControl()
         sampleClean = 0;
         sampleActiv = 1;
@@ -102,7 +102,7 @@ $('#button_clean').click(function() {
    if (sample == 0) {
        alert('No sample selected');
        
-   }   else if (sample == 'copper') {
+   }   else if (sample == 'Copper') {
         disableControl()
         sampleClean = 1;
        //$('#cam_feed').attr('src','PaulaCopperCleaning.jpg');
@@ -110,7 +110,7 @@ $('#button_clean').click(function() {
        playVideo()
        samplePos = 2;
        
-   }   else if (sample == 'iron') {
+   }   else if (sample == 'Iron') {
         disableControl()
         sampleClean = 1;
        //$('#cam_feed').attr('src','PaulaIronCleaning.jpg');
@@ -124,14 +124,14 @@ $('#button_bring').click(function() {
    if (sample == 0) {
        alert('No sample selected');
        
-   }   else if (sample == 'copper' && sampleClean == 1) {
+   }   else if (sample == 'Copper' && sampleClean == 1) {
         disableControl()
        //$('#cam_feed').attr('src','PaulaCopperMeasuring.jpg');
        loc2 = 4
         playVideo()
        samplePos = 3
        
-   }   else if (sample == 'iron' && sampleClean == 1) {
+   }   else if (sample == 'Iron' && sampleClean == 1) {
         disableControl()
        //$('#cam_feed').attr('src','PaulaIronMeasuring.jpg');
        loc2 = 4
@@ -147,7 +147,7 @@ $('#button_bin').click(function() {
    if (sample == 0) {
        alert('No sample selected');
        
-   }   else if (sample == 'copper' && sampleClean == 1) {
+   }   else if (sample == 'Copper' && sampleClean == 1) {
         disableControl()
        //$('#cam_feed').attr('src','PaulaCopperDiscarding.jpg');
        loc2 = 5
@@ -155,7 +155,7 @@ $('#button_bin').click(function() {
        samplePos = 4
        sample = 0
        
-   }   else if (sample == 'iron' && sampleClean == 1) {
+   }   else if (sample == 'Iron' && sampleClean == 1) {
         disableControl()
        //$('#cam_feed').attr('src','PaulaIronDiscarding.jpg');
        loc2 = 5
@@ -177,12 +177,12 @@ $('#button_startCount').click(function() {
        $('#LED').attr('src','rot.png');
        mesTimer = setTimeout(mesBlank, mesLength)
        
-   }   else if (sample == 'copper' && sampleActiv == 1 && samplePos == 3) {
+   }   else if (sample == 'Copper' && sampleActiv == 1 && samplePos == 3) {
       $('#LED').attr('src','rot.png');
        mesTimer = setTimeout(mesCopper, mesLength);
        
        
-   }   else if (sample == 'iron' && sampleActiv == 1 && samplePos == 3) {$('#LED').attr('src','rot.png');
+   }   else if (sample == 'Iron' && sampleActiv == 1 && samplePos == 3) {$('#LED').attr('src','rot.png');
        mesTimer = setTimeout(mesIron, mesLength);
        
     }   
