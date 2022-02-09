@@ -48,7 +48,7 @@ $('#button_cam').click(function() {
 
 $('#button_copper').click(function() {
     disableControl()
-   sample = 'copper'; 
+   sample = 'Copper'; 
     sampleClean = 1;
     samplePos = 0;
     sampleActiv = 0;
