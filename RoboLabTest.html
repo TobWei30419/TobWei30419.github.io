@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>PAuLa</title>
+    <meta charset="utf-8">
+    <style>
+		input[type=number]::-webkit-inner-spin-button {
+			opacity: 1
+		}
+
+		* {
+			box-sizing: border-box;
+			font-family: Arial, Helvetica, sans-serif;
+		}
+		
+		*:focus {
+			outline: 0px solid transparent;
+		}
+		
+		button {
+			cursor: pointer;
+		}
+		
+		.big_button {
+			background-color: #e6e6e6;
+			box-shadow: inset 0 0 2px 0 rgba(0,0,0,1);
+			white-space: pre-wrap;
+			border-radius: 3px;
+            margin-left: 100px
+		}
+		
+		.big_button:hover:not([DISABLED]) {
+			background-color: #f2f2f2;
+		}
+		
+		.big_button:active:not([DISABLED]) {
+			transform: translateY(1px);
+		}
+		
+		#mainPage {
+			display: grid;
+			grid-template-columns: 62% 38%;
+			grid-template-rows: 50% 50%;
+			grid-column-gap: 10px;
+			grid-row-gab: 10px;
+			width: 1300px;
+			height: 800px;
+			background-color: #f2f2f2;
+			border: 2px solid gray;
+			border-radius: 3px;
+			padding: 5px 5px 5px 5px;
+			margin-top: 4vh;
+			margin-left: 1vw;
+		}
+		
+        .center {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+        
+		.panel {
+			border: 2px solid gray;
+            position: relative;
+            margin:
+		}
+		
+		#ControlArea {
+			grid-column: 1;
+			grid-row: 2;
+			background-color: #d9d9d9;
+			border-radius: 0 0 3px 3px;
+		}
+		
+		#control {
+			grid-column: 2;
+			grid-row-start: 1;
+			grid-row-end: 3;
+			border: none;
+            border-radius: 0 0 3px 3px;
+			margin-right: 10px;
+            margin-top: 10px;
+            margin-bottom: 10px
+		}
+		
+		
+		/* ***********Camera Window********** */
+		#camera {
+			grid-column: 1;
+			grid-row: 1;
+			border-bottom: none;
+			background-color: #d9d9d9;
+			
+			display: grid;
+			grid-template-columns: 19% 81%;
+			grid-template-rows: 33% 67%;
+			border-radius: 3px 3px 0 0;
+		}
+		
+		#cam_feed {
+			grid-column: 2;
+			grid-row-start: 1;
+			grid-row-end: 3;
+			height: 360px;
+			margin: 15px 0px;
+			float: right;
+			border: 5px groove gray;
+		}
+        
+        textarea {
+            width: 50%;
+            height: 50px;
+            padding: 12px 20px;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            background-color: #f8f8f8;
+            font-size: 19px;
+            resize: none;
+        }
+		
+		
+		#button_cam {
+			width: 100px;
+			height: 60px;
+			margin: auto;
+			padding: 5px;
+		}
+        
+        #button_copper {
+			width: 190px;
+			height: 60px;
+			margin: auto;
+			padding: 5px;
+		}
+        
+        #button_iron {
+			width: 190px;
+			height: 60px;
+			margin: auto;
+			padding: 5px;
+		}
+		
+        #button_clean {
+			width: 190px;
+			height: 60px;
+			margin: auto;
+			padding: 5px;
+		}	 
+		
+        #button_bring {
+			width: 190px;
+			height: 60px;
+			margin: auto;
+			padding: 5px;
+		}
+        
+		 #button_testJS {
+			width: 190px;
+			height: 60px;
+			margin: auto;
+			padding: 5px;
+		}
+        
+        #button_bin {
+			width: 190px;
+			height: 60px;
+			margin: auto;
+			padding: 5px;
+		}	 
+        
+         #button_putIn {
+			width: 190px;
+			height: 60px;
+			margin: auto;
+			padding: 5px;
+		}	
+        
+        	#select_putInTime {
+			display: ;
+			float: ;
+			text-align: center;
+			margin-left: 10px;
+		}
+        
+         #button_resetSample {
+			width: 190px;
+			height: 60px;
+			margin: auto;
+			padding: 5px;
+		}	
+        
+        #camera b {
+			font-size: 20pt; 
+			margin-left: 10px;
+			margin-top: 10px;
+		}
+		
+		
+		/* ***************** Plot Window ************* */
+		#plot_header {
+			display: block;
+			font-size: 20pt;
+			margin-left: 10px;
+			margin-top: 10px;
+			margin-bottom: 5px;
+		}
+		
+		#legend {
+			display: inline;
+			float: left;
+			width: 150px;
+			height: 150px;
+			margin-left: 10px;
+			margin-top: 10px;
+			padding-left: 5px;
+		}
+		
+		.legend_item {
+			width: 100%;
+			height: 25%;
+			padding-left: 5px;
+			padding-right: 5px;
+			float: left;
+			margin-top: 5%;
+		}
+		
+		.legend_item p {
+			display: inline;
+			float: left;
+			font-size: 10pt;
+			margin-top: 5px;
+		}
+		
+		.legend_item img {
+			display: inline;
+			float: right;
+			height: 90%;
+			width: 30%;
+			background-color: white;
+			border: 1px solid;
+			margin-top: 1%;
+		}
+		
+		#plot {
+			display: inline;
+			float: right;
+			height: 370px;
+			width: 600px;
+			margin-right: 10px;
+			margin-top: -35px;
+			//border: 3px groove gray;
+			padding: 0px;
+		}
+		
+		/* ************Control Window***************** */
+		.tabcontrol {
+			background-color: #f2f2f2;
+			display: block;
+			height: 40px;
+			padding-top: 10px;
+			/*border: 1px solid;*/
+		}
+		
+		.tabcontrol button {
+			height: 25px;
+			padding-right: 10px;
+			padding-left: 10px;
+			border-radius: 5px 5px 0 0;
+			border: 1px solid gray;
+			float: left;
+		}
+		
+		.tabcontrol button.active {
+			border-bottom: none;
+			background-color: #d9d9d9;
+		}
+		
+		.tab {
+			width: 480px;
+			height: 750px;
+			padding-bottom: 10px;
+            padding-right: 10px;
+            padding-left: 10px;
+            padding-top: -10px;
+			border: 2px solid gray;
+			border-radius: 0 0 3px 3px;
+			border-top: 5p;
+			margin-top: 5px;
+			background-color: #d9d9d9;
+		}
+		
+		.tab b {
+			font-size: 13pt;
+		}
+		
+		/* ******** Operation Tab ******** */
+		#DetLog-grid {
+			display: grid;
+			grid-template-rows: 40% 60%;
+			height: 100%;
+			width: 100%;
+		}
+		
+		#op-grid p {
+			font-size: 12pt;
+		}
+		
+		#op-grid b {
+			font-size: 13pt;
+		}
+		
+		.op-item {
+			border: 3px double black;
+			border-bottom: none;
+			padding-left: 15px;
+			padding-top: -10px;
+		}
+		
+		.op-header {
+			display: block; 
+			margin-bottom: 5px;
+		}
+		
+		/* ********** Injection Control ******** */
+		#button_injection {
+			display: inline;
+			float: right;
+			width: 100px;
+			height: 60px;
+			padding: 5px 10px;
+			margin-right: 40px;
+			margin-top: -50px;
+			color: red;
+		}
+		
+		#injection_count {
+			display: inline;
+			line-height: 1.8;
+		}
+		
+		/* ************ Pump Control *********** */
+		#select_mesTime {
+			display: inline;
+			float: left;
+			text-align: center;
+			margin-left: 10px;
+		}
+		
+		#pump_control {
+			display: inline;
+			float: right;
+			text-align: center;
+			margin-top: -12px;
+			margin-right: 50px;
+		}
+		
+		.toggleButton {
+			width: 65px;
+			height: 27px;
+			border-radius: 50% 50%;
+			box-shadow: inset 0 0 6px 0 rgba(0,0,0,1);
+			background: linear-gradient(to right, #e6e6e6 50%, green 50%);
+		}
+		
+		.activated {
+			background: linear-gradient(to right, #e6e6e6 50%, #40ff00 50%);
+		}
+		
+		
+		/* *************** Valve Control ********** */
+		#valve_control {
+			display: flex;
+		}
+		
+		#valve_control div {
+			width: 142px;
+			text-align: center;
+		}
+		
+		#valve_control div p {
+			font-size: 10pt;
+			line-height: 1.5;
+			margin-bottom: 5px;	
+		}
+		
+		
+		/* *************** Schematic Setup ********* */
+		#sketch {
+			height: 260px;
+			margin: 3px 35px;
+		}
+		
+		/* *********** Measurement Tab ************** */
+        
+        #button_startCount {
+			width: 190px;
+			height: 60px;
+			margin: auto;
+			padding: 5px;
+		}	
+        
+        #button_stopCount {
+			width: 190px;
+			height: 60px;
+			margin: auto;
+			padding: 5px;
+		}	
+        
+        #button_resetCount {
+			width: 190px;
+			height: 60px;
+			margin: auto;
+			padding: 5px;
+		}	
+			
+		#mes-grid {
+			height: 100%;
+			width: 100%;
+			border: 3px double black;
+			padding: 15px;
+		}
+		
+		#mes_data {
+			grid-column-start: 1;
+			grid-column-end: 3;
+			border-top: none;
+		}
+		
+		#mes-setting {
+			display: inline-block;
+			width: 420px;
+			height: 70px; 
+			overflow: hidden;
+			margin-top: 10px;
+			margin-bottom: 20px;
+		}
+		
+		.mes-set {
+			display: inline-block;
+			height: 70px;
+			width: 150px;
+			font-size: 10pt;
+			float: left;
+			text-align: center;
+		}
+		
+		.mes-set input {
+			width: 60px;
+			font-size: 10pt;
+		}
+		
+		.mes-set p {
+			margin: 7px;
+		}
+		
+		#button_measurement {
+			display: inline-block;
+			width: 100px;
+			height: 60px;
+			float: right;
+			margin-right: 10px;
+			margin-top: 5px;
+		}
+		
+		#table_container {
+			display: block;
+			width: 98%;
+			height: 68%;
+			margin-bottom: 10px;
+			overflow-y: scroll;
+			border: 3px groove gray;
+		}
+	
+		#table_data {
+			width: 100%;
+			height: 100%;
+			font-size: 10pt;
+			background-color: white;
+			text-align: left;
+		}
+		
+		#table_data, th, tr, td {
+			border: 1px solid black;
+			border-collapse: collapse;
+			height: 12pt;
+		}
+		
+		#button_reset_data {
+			float: right;
+			width: 100px;
+			height: 50px;
+			margin-right: 10px;
+			margin-left: 20px;
+		}
+		
+		#button_download_data {
+			float: right;
+			width: 150px;
+			height: 50px;
+			margin-left: 0px;
+		}
+		
+		/* ******* Log Tab ************ */
+		
+		#log-grid {
+			width: 100%;
+			height: 100%;
+			border: 3px double black;
+			padding: 10px;
+		}
+		
+		#input_comment {
+			display: inline-block;
+			margin-top: 10px;
+			resize: none;
+			font-size: 10pt;
+		}
+		
+		#button_comment {
+			display: inline-block;
+			float: right;
+			margin-right: 6px;
+			margin-top: 3px;
+			width: 100px;
+			height: 60px;
+		}
+		
+		#log_container {
+			width: 430px;
+			height: 200px;
+			margin-top: 10px;
+			margin-bottom: 10px;
+			border: 3px groove gray;
+			overflow-y: scroll;
+			background-color: #f2f2f2;
+		}
+		
+		#log_text {
+			width: 100%;
+			height: 100%;	
+			font-size: 10pt;
+		}
+		
+		#button_reset_log {
+			float: right;
+			width: 100px;
+			height: 50px;
+			margin-right: 10px;
+			margin-left: 20px;
+		}
+		
+		#button_download_log {
+			float: right;
+			width: 150px;
+			height: 50px;
+			margin-left: 0px;
+		}
+	</style>
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<div id="head_foot" style="margin-bottom: 20px;"></div>
+		<div id = "mainPage">
+            
+			<div id = "camera" class = "panel">
+				<b style = "display: block; float: left;">Camera</b>
+				<button id = "button_cam" class = "big_button"> Camera<br>ON </button>
+				<!-- <img id = "cam_feed" src = "PaulaCam1.jpg" alt = "Camera"> -->
+                <video id ="cam_feed"  autoplay muted src="Videos2/Paula_start.mp4"></video>
+			</div>
+            <div id = "ControlArea" class = "panel">
+				<b id = "plot_header">Control Area</b>
+                <div class= "center">
+                <button style='margin-right: 0 px; margin-bottom:10px' id= "button_copper" class="big_button">Get copper sample</button>
+                <button style='margin-right: ; margin-bottom:10px' id= "button_iron" class="big_button">Get iron sample</button>
+                    
+                    <p>Time in Solution (min):
+                    <select id = "select_putInTime" style='margin-left: 33px'>
+									<option value='1'>1</option>
+									<option value='2'>2</option>
+									<option value='3'>3</option>
+									<option value='4'>4</option>
+									<option value='5'>5</option>
+									<option value='6'>6</option>
+									<option value='7'>7</option>
+									<option value='8'>8</option>
+									<option value='9'>9</option>
+									<option value='10'>10</option>
+								</select></p>
+                     <button style='margin-right: -5 px; margin-bottom:10px' id= "button_putIn" class="big_button">Put sample in solution</button>
+                <button style='margin-right: 9px; margin-bottom:10px' id= "button_clean" class="big_button">Clean sample</button>
+                <button style='margin-right: px; margin-bottom:10px' id= "button_bring" class="big_button">Bring sample to the detector</button>
+                <button style='margin-right: 9px;' id= "button_bin" class="big_button">Bring sample to the waste bin</button>
+                <button id= "button_resetSample" class="big_button">Reset samples</button>
+                <button style='margin-right: 9px; margin-top: -10px' id= "button_testJS" class="big_button">No press, admin only</button>
+                
+                </div>
+                </div>
+            <div id= "control" class="panel">
+            <div id="operation" class="tab">
+            <div id= "DetLog-grid">
+                <div id= "op-item"><h1 style="text-align: center">Measurement</h1>
+                <div id = "select_mesTime">
+								<p style="margin-left: 45px; margin-bottom: -1px">Measurement time (s)</p>
+								<select id = "count_rate" style='margin-top: -5px'>
+									<option value='10'>10</option>
+									<option value='20'>20</option>
+									<option value='30'>30</option>
+									<option value='40'>40</option>
+									<option value='50'>50</option>
+									<option value='60'>60</option>
+									<option value='70'>70</option>
+									<option value='80'>80</option>
+									<option value='90'>90</option>
+									<option value='100'>100</option>
+								</select>
+							</div>
+                    <button style='margin-left: 22px; margin-bottom:10px' id= "button_startCount" class="big_button">Start counting</button>
+                   
+                    <!--<button style='margin-left: 40px; margin-bottom:10px; margin-top: 20px' id= "button_stopCount" class="big_button">Stop counting</button>
+                   <button id= "button_resetCount" class="big_button">Reset</button> -->
+                    <br>
+                    <div style='margin-top: 40px'>
+                    <img id="LED" src="grün.png" alt="LED" style="width:50px;height:50px;float:left;margin-left: 100px;margin-top: 50p">
+                    <form>
+                    <textarea rows = "7" cols = "10" id="numberCount">Number of counts</textarea></form>
+                        </div>
+
+                    
+                </div>
+                
+                <div id = "log-grid">
+							<b>Logfile<br></b>
+							<textarea rows = "7" cols = "38" id = "input_comment" placeholder = "Comment"></textarea>
+							<button id = "button_comment" class = "big_button">Add Comment to Log</button>
+							<div id = "log_container">
+								<div id = "log_text"></div>
+							</div>
+							<button class = "big_button" id = "button_download_log">Download Log</button>
+                
+                
+                
+                </div>
+                 </div>
+                </div>
+    </div>
+				
+            
+			</div>
+    
+     <script src="RoboLabScriptTest2.js">
+    </script>
+    </body> 
+</html>
