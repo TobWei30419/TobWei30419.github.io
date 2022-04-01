@@ -18,8 +18,8 @@ var background = 0
 var i = 0
 var numberCount = 0;
 var countRate = 0;
-var mesLength = 2500;
-var videoLength = 2500;
+var mesLength = 1000;
+var videoLength = 5000;
 var kIron = 0.3
 var loc1 = 0 
 var loc2 = 0
@@ -45,7 +45,7 @@ add_log("Experiment started");
 $('#button_cam').click(function() {
     $('#cam_feed').toggle();
 });
-
+ 
 $('#button_copper').click(function() {
     disableControl()
    sample = 'Copper'; 
@@ -73,29 +73,27 @@ $('#button_iron').click(function() {
 $('#button_putIn').click(function() {
    if (sample == 0) {
        alert('No sample selected!')
-   }  else if (sample == 'Copper' && sampleActiv == 0) {
+   }  else if (sample == 'Copper') {
        disableControl()
         sampleClean = 0;
        sampleActiv = 1;
-       timeIn =  document.getElementById("select_putInTime").value
+       timeIn +=  Number(document.getElementById("select_putInTime").value)
      //  $('#cam_feed').attr('src','PaulaCopperInSolution.jpg');
        loc2=2
        playVideo()
        samplePos = 1
        
-    } else if (sample == 'Iron' && sampleActiv == 0) {
+    } else if (sample == 'Iron') {
         disableControl()
         sampleClean = 0;
         sampleActiv = 1;
-        timeIn =  document.getElementById("select_putInTime").value
+        timeIn +=  Number(document.getElementById("select_putInTime").value)
     //   $('#cam_feed').attr('src','PaulaIronInSolution.jpg');
         loc2=2
         playVideo()
        samplePos = 1
         
-    } else if (sampleActiv == 1) {
-        alert('The sample was already in solution!')
-    }
+    } 
 });
 
 $('#button_clean').click(function() {
@@ -175,15 +173,15 @@ $('#button_startCount').click(function() {
     waitButton("button_startCount")
    if (samplePos != 3 || sampleActiv == 0) {
        $('#LED').attr('src','rot.png');
-       mesTimer = setTimeout(mesBlank, mesLength)
+       mesTimer = setTimeout(mesBlank, timeMes*100)
        
    }   else if (sample == 'Copper' && sampleActiv == 1 && samplePos == 3) {
       $('#LED').attr('src','rot.png');
-       mesTimer = setTimeout(mesCopper, mesLength);
+       mesTimer = setTimeout(mesCopper, timeMes*100);
        
        
    }   else if (sample == 'Iron' && sampleActiv == 1 && samplePos == 3) {$('#LED').attr('src','rot.png');
-       mesTimer = setTimeout(mesIron, mesLength);
+       mesTimer = setTimeout(mesIron, timeMes*100);
        
     }   
 });
@@ -202,7 +200,7 @@ $('#button_resetSample').click(function(){
  numberCount = 0;
  countRate = 0;
  mesLength = 2500;
- videoLength = 2500;
+ videoLength = 5000;
  kIron = 0.3
  loc1 = 0 
  loc2 = 0
@@ -326,7 +324,7 @@ function add_comment() {
     
 function waitButton(id) {
       document.getElementById(id).disabled = true;
-      setTimeout(function(){document.getElementById(id).disabled = false;},mesLength);
+      setTimeout(function(){document.getElementById(id).disabled = false;},document.getElementById("count_rate").value);
   }
 
 function disableControl() {
